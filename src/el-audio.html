@@ -1,0 +1,96 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="el-audio">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class ElAudio extends Polymer.Element {
+      static get is() { return 'el-audio'; }
+      static get properties() {
+        return {
+          active: {
+            type: Boolean,
+            value: false,
+            readOnly: true,
+            reflectToAttribute: true,
+            notify: true
+          },
+          url: {
+            type: String
+          },
+          timeout: {
+            type: Number,
+            value: 1000
+          },
+          audioBuffer: {
+            type: Object,
+            readOnly: true
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        var context = new AudioContext();
+        fetch(this.url)
+          .then(response => response.arrayBuffer())
+          .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+          .then(audioBuffer => {
+            this._setAudioBuffer(audioBuffer);
+          });
+      }
+
+      playSound() {
+        this._setActive(true);
+        this._play(this.audioBuffer);
+      }
+
+      _play(audioBuffer) {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        var context = new AudioContext();
+        const source = context.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(context.destination);
+        source.start();
+        setTimeout(() => {
+          source.stop();
+          this._setActive(false);
+        }, this.timeout);
+      }
+
+      _playTestSound() {
+        this._setActive(true);
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        var context = new AudioContext();
+        var oscillator = context.createOscillator();
+        oscillator.frequency.value = 200;
+        oscillator.connect(context.destination);
+        oscillator.start(0);
+        setTimeout(() => {
+          oscillator.stop(0);
+          this._setActive(false);
+        }, this.timeout);
+      }
+    }
+
+    window.customElements.define(ElAudio.is, ElAudio);
+  </script>
+</dom-module>
+
+(function () { 'use strict'; const URL = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/Yodel_Sound_Effect.mp3'; const
+context = new AudioContext(); const playButton = document.querySelector('#play'); let yodelBuffer; window.fetch(URL) .then(response
+=> response.arrayBuffer()) .then(arrayBuffer => context.decodeAudioData(arrayBuffer)) .then(audioBuffer => { playButton.disabled
+= false; yodelBuffer = audioBuffer; }); playButton.onclick = () => play(yodelBuffer); function play(audioBuffer) { const
+source = context.createBufferSource(); source.buffer = audioBuffer; source.connect(context.destination); source.start();
+} }());
