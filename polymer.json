@@ -7,9 +7,11 @@
     "src/el-gyroscope.html"
   ],
   "sources": [
+    "audio/**/*",
     "static/**/*",
     "images/**/*",
-    "src/**/*"
+    "src/**/*",
+    "*.php"
   ],
   "extraDependencies": [
     "bower_components/webcomponentsjs/*.js",

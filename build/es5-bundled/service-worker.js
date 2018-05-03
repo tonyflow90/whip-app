@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["bower_components/webcomponentsjs/webcomponents-loader.js","f7eb9862b1725aef7e59f8584c2a2efb"],["index.html","1aba2e8276d3b9854121d3b680a982a5"],["manifest.json","024d20edd5ea8a73c98cd564e6b91735"],["src/el-audio.html","2a88dceffc691f39c95e730d249c606f"],["src/el-gyroscope.html","69554701ff1d60a382208b8dfac86e07"],["src/whip-app.html","b8a5bfc29fc87aae80439fd714e884e7"]];
+var precacheConfig = [["bower_components/webcomponentsjs/webcomponents-loader.js","f7eb9862b1725aef7e59f8584c2a2efb"],["index.html","5fadff377141a7e1fea9615e3d2217ba"],["manifest.json","9c167c873b42997218e00ecfb3413695"],["src/el-audio.html","2a88dceffc691f39c95e730d249c606f"],["src/el-gyroscope.html","69554701ff1d60a382208b8dfac86e07"],["src/whip-app.html","22b7da7781a515b325b6c5da49545dc4"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 

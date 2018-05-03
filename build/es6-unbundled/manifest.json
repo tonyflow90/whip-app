@@ -1,25 +1,21 @@
 {
   "name": "Whip",
   "short_name": "Whip",
-  "description": "My App description",
+  "description": "Whip App description",
   "icons": [
     {
-      "src": "images/whip.png",
+      "src": "images/manifest/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "images/whip.png",
+      "src": "images/manifest/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#ffffff",
+  "theme_color": "#008b8b",
   "background_color": "#ffffff"
 }

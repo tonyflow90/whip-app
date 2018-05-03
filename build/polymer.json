@@ -7,9 +7,11 @@
     "src\\el-gyroscope.html"
   ],
   "sources": [
+    "audio\\**\\*",
     "static\\**\\*",
     "images\\**\\*",
     "src\\**\\*",
+    "*.php",
     "index.html",
     "src\\whip-app.html",
     "src\\whip-app.html",
