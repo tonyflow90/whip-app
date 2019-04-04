@@ -103,7 +103,7 @@ class WhipApp extends HTMLElement {
                 </style>
                 <el-gyroscope id="gyroscope" x-axis="${this.x}" y-axis="${this.y}" z-axis="${this.z}"></el-gyroscope>
 
-                <el-audio id="audio" url="../audio/whip.mp3" timeout="550"></el-audio>
+                <el-audio id="audio" url="./audio/whip.mp3" timeout="550"></el-audio>
 
                 <dialog id="accelerationDialog">
                     <div class="acceleration">
@@ -123,7 +123,7 @@ class WhipApp extends HTMLElement {
                     <div class="content">
                         <button @click=${this._toggleShowAcceleration}>Show Acceleration ✅</button>
                         <div @click=${this._playSound}>
-                            <img src="../images/whip.png"/>
+                            <img src="./images/whip.png"/>
                         </div>
                     </div>
 
