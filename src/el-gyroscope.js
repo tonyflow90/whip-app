@@ -20,15 +20,11 @@ class ElGyroscope extends HTMLElement {
   }
 
   connectedCallback(e) {
-    setInterval(() => {
-      this.xAxis++;
-      this.setAttribute('x-axis', this.xAxis);
-    }, 1000);
     if (window.DeviceMotionEvent) {
       window.addEventListener('devicemotion', this._deviceMotionListener.bind(this), false);
     } else {
       let el = this._shadowRoot.querySelector('#errorDialog')
-      el.open = true;
+      el.showModal();
     }
   }
 
@@ -59,27 +55,10 @@ class ElGyroscope extends HTMLElement {
   set zAxis(newValue) {
     this.setAttribute('zAxis', newValue);
   }
-  static get observedAttributes() {
-    return ['xAxis', 'yAxis', 'zAxis'];
-  }
-
-  attributeChangedCallback(attr, oldVal, newVal) {
-    switch (attr) {
-      case 'xAxis':
-        this.xAxis = newVal;
-        break;
-      case 'yAxis':
-        this.yAxis = newVal;
-        break;
-      case 'zAxis':
-        this.zAxis = newVal;
-        break;
-    }
-  }
 
   _close() {
     let el = this._shadowRoot.querySelector('#errorDialog')
-    el.open = !el.open;
+    el.close();
   }
 
   _deviceMotionListener(event) {

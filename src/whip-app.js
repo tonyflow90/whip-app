@@ -21,10 +21,14 @@ class WhipApp extends HTMLElement {
         });
     }
 
-    _showAcceleration(e) {
+    toggleAccelerationDialog(e) {
         e.preventDefault();
         let el = this._shadowRoot.querySelector('#accelerationDialog')
-        el.open = !el.open;
+        if (el.open) {
+            el.close();
+        } else {
+            el.showModal();
+        }
     }
 
     _playSound(e) {
@@ -83,6 +87,16 @@ class WhipApp extends HTMLElement {
                     bottom: 0;
                 }
 
+                .social {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    text-align: center;
+                    color: white;
+                    padding: 12px;
+                    bottom: 0;
+                }
+
                 .acceleration {
                             display: flex;
                             flex-direction: row;
@@ -90,20 +104,32 @@ class WhipApp extends HTMLElement {
                 }
 
                 dialog {
-                    bottom:0;
                     position: fixed;
+                    bottom: 0;
                     background-color: black;
                     color: #A9A9A9;
-                    width: 80vw;
-                    max-width: 400px;
+                    width: 100vw;
+                    padding:0;
                     margin: 0;
                     border: none;
                 }
 
-                img {
+                dialog a {
+                    display:flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding:12px;
+                }
+
+                .whip-image {
                     border-radius:50%;
                     max-width:400px;
                     width: 80vw;
+                }
+                .icon {
+                    width: 48px;
+                    padding: 12px;
+                    color: grey;
                 }
                 </style>
                 <el-gyroscope id="gyroscope" x-axis="${this.x}" y-axis="${this.y}" z-axis="${this.z}"></el-gyroscope>
@@ -116,23 +142,33 @@ class WhipApp extends HTMLElement {
                             <p>y-axis: ${this._formatNumber(this.y)}</p>
                             <p>y-axis: ${this._formatNumber(this.z)}</p>
                         </div>
+                        <a @click=${this.toggleAccelerationDialog}>close</a>
                 </dialog>
 
                 <div class="flex-container">
                     <div class="header">
-                        <div title>Whip</div>
-                        <a @click=${this._showAcceleration}>Show Acceleration</a>
+                        <div title>Whip-App</div>
                     </div>
 
                     <div class="content">
                         <div @click=${this._playSound}>
-                            <img src="./images/whip.png"/>
+                            <img class="whip-image" src="./images/whip.png"/>
                         </div>
                     </div>
 
                     <div class="footer">
-                        <div>Made by</div>
-                        <div>Keno Bohlen</div>
+                        <!-- <a @click=${this.toggleAccelerationDialog}>Show Acceleration</a> -->
+                        <!-- <br/> -->
+                        <a>Made by</a>
+                        <a>tonyflow90</a>
+                        <div class="social">
+                            <a href="https://github.com/tonyflow90">
+                                <img class="icon" src="../images/github.svg"/>
+                            </a>
+                            <a href="https://twitter.com/itzeme">
+                                <img class="icon" src="../images/twitter.svg"/>
+                            </a>
+                        </div>
                     </div>
                 </div>
         `;
