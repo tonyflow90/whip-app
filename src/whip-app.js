@@ -163,10 +163,10 @@ class WhipApp extends HTMLElement {
                         <a>tonyflow90</a>
                         <div class="social">
                             <a href="https://github.com/tonyflow90">
-                                <img class="icon" src="../images/github.svg"/>
+                                <img class="icon" src="./images/github.svg"/>
                             </a>
                             <a href="https://twitter.com/itzeme">
-                                <img class="icon" src="../images/twitter.svg"/>
+                                <img class="icon" src="./images/twitter.svg"/>
                             </a>
                         </div>
                     </div>
