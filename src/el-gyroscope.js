@@ -1,5 +1,8 @@
 // import { html, render } from '../node_modules/lit-html/lit-html.js';
-import {html, render} from 'https://unpkg.com/lit-html?module';
+import {
+  html,
+  render
+} from 'https://unpkg.com/lit-html?module';
 
 class ElGyroscope extends HTMLElement {
 
@@ -8,24 +11,54 @@ class ElGyroscope extends HTMLElement {
     this.xAxis = 0;
     this.yAxis = 0;
     this.zAxis = 0;
-    this._shadowRoot = this.attachShadow({ 'mode': 'open' });
-    render(this.template(), this._shadowRoot, { eventContext: this });
+    this._shadowRoot = this.attachShadow({
+      'mode': 'open'
+    });
+    render(this.template(), this._shadowRoot, {
+      eventContext: this
+    });
   }
 
   connectedCallback(e) {
+    setInterval(() => {
+      this.xAxis++;
+      this.setAttribute('x-axis', this.xAxis);
+    }, 1000);
     if (window.DeviceMotionEvent) {
-      window.addEventListener('devicemotion', this.deviceMotionListener.bind(this), false);
-    }
-    else {
-      const toast = document.querySelector('paper-toast');
-      this.$.toast.textContent = "devicemotion not supported on your device or browser.";
-      this.$.toast.open();
+      window.addEventListener('devicemotion', this._deviceMotionListener.bind(this), false);
+    } else {
+      let el = this._shadowRoot.querySelector('#errorDialog')
+      el.open = true;
     }
   }
 
-  disconnectedCallback() {
+  disconnectedCallback() {}
+
+  get xAxis() {
+    return this.getAttribute('xAxis');
   }
 
+  set xAxis(newValue) {
+    this.setAttribute('xAxis', newValue);
+  }
+
+
+  get yAxis() {
+    return this.getAttribute('yAxis');
+  }
+
+  set yAxis(newValue) {
+    this.setAttribute('yAxis', newValue);
+  }
+
+
+  get zAxis() {
+    return this.getAttribute('zAxis');
+  }
+
+  set zAxis(newValue) {
+    this.setAttribute('zAxis', newValue);
+  }
   static get observedAttributes() {
     return ['xAxis', 'yAxis', 'zAxis'];
   }
@@ -44,30 +77,41 @@ class ElGyroscope extends HTMLElement {
     }
   }
 
-  deviceMotionListener(event) {
-    this.setAttribute('x-axis', (event.acceleration.x != null || event.acceleration.x != undefined ? event.acceleration.x : 0) );
-    this.setAttribute('y-axis', (event.acceleration.y != null || event.acceleration.y != undefined ? event.acceleration.y : 0) );
-    this.setAttribute('z-axis', (event.acceleration.z != null || event.acceleration.z != undefined ? event.acceleration.z : 0) );
+  _close() {
+    let el = this._shadowRoot.querySelector('#errorDialog')
+    el.open = !el.open;
+  }
+
+  _deviceMotionListener(event) {
+    this.setAttribute('x-axis', (event.acceleration.x != null || event.acceleration.x != undefined ? event.acceleration.x : 0));
+    this.setAttribute('y-axis', (event.acceleration.y != null || event.acceleration.y != undefined ? event.acceleration.y : 0));
+    this.setAttribute('z-axis', (event.acceleration.z != null || event.acceleration.z != undefined ? event.acceleration.z : 0));
   }
 
   template() {
-    return html`
+    return html `
         <style>
           :host {
             display: block;
           }
           dialog {
+            bottom:0;
+            position: fixed;
+            flex-direction: column;
             background-color: black;
             color: #A9A9A9;
             width: 100vw;
-            padding: 12px 0px 12px 0px;
-            margin: 0;
             border: none;
-            border-radius: 25px;
+          }
+          p {
+            display:flex;
+            align-items: center;
+            justify-content: center;
           }
         </style>
-        <dialog id="accelerationDialog">
+         <dialog id="errorDialog">
           <p>devicemotion not supported on your device or browser.</p>
+          <a @click=${this._close}>close</a>
         </dialog>
     `;
   }
