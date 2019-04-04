@@ -39,11 +39,11 @@
   <meta name="msapplication-TileColor" content="#008b8b">
   <meta name="msapplication-tap-highlight" content="no">
 
-  <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module">
+      import "./src/whip-app.js"
+  </script>
 
-  <link rel="import" href="/src/whip-app.html">
-
-  <script>
+<script>
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
