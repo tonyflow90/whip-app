@@ -127,9 +127,9 @@ class WhipApp extends HTMLElement {
                     width: 80vw;
                 }
                 .icon {
-                    width: 48px;
+                    width:48px;
                     padding: 12px;
-                    color: grey;
+                    color: black;
                 }
                 </style>
                 <el-gyroscope id="gyroscope" x-axis="${this.x}" y-axis="${this.y}" z-axis="${this.z}"></el-gyroscope>

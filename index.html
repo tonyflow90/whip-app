@@ -39,17 +39,20 @@
   <meta name="msapplication-TileColor" content="#008b8b">
   <meta name="msapplication-tap-highlight" content="no">
 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  
   <script type="module">
-      import "./src/whip-app.js"
+    import "./src/whip-app.js"
   </script>
 
-<script>
+  <script>
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('./sw.js');
       });
     }
+
   </script>
 
   <!-- Add any global styles for body, document, etc. -->
@@ -69,7 +72,7 @@
 </head>
 
 <body>
-  <whip-app></whip-app>
+    <whip-app></whip-app>
 </body>
 
 </html>
