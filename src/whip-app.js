@@ -58,7 +58,7 @@ class WhipApp extends HTMLElement {
                     flex-direction: column;
                     align-items: stretch;
                     background-color: #008b8b;
-                    height: 100vh;
+                    min-height: 100vh;
                 }
 
                 .header {
